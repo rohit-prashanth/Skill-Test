@@ -1,16 +1,20 @@
 from django.db import models
-
-# Create your models here.
+class DomainCategory(models.Model):
+    category_id = models.CharField(max_length=20)
+    category_name = models.CharField(max_length=20)
+class DifficultyLevel(models.Model):
+    difficulty_id = models.CharField(max_length=20)
+    difficulty_name = models.CharField(max_length=20)
 class QuestionBank(models.Model):
     question_id = models.CharField(max_length=50,primary_key=True)
     question = models.TextField(max_length=1000)
-    difficulty_level = [('EA','Easy'),('ME','Medium'),('HA','Hard')]
-    difficulty_id = models.CharField(max_length=10,choices=difficulty_level)
-    category_names=[('PY','Python'),('JV','Java'),('DN','Dotnet'),('TS','Testing'),('UI','UI'),('IDM','IDM')]
-    category_id = models.CharField(max_length=10,choices=category_names)
+    category_names = models.ForeignKey(DomainCategory,on_delete=models.CASCADE)
+    difficulty_names = models.ForeignKey(DifficultyLevel,on_delete=models.CASCADE)
+    category_id = models.CharField(max_length=10)
     created_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
     flag = models.BooleanField(default=1)
+
 
 class OptionsTable(models.Model):
     option_id = models.CharField(max_length=50,primary_key=True)
@@ -42,3 +46,4 @@ class TestLinkTable(models.Model):
     end_time = models.CharField(max_length=50)
     test_link = models.URLField()
     flag = models.BooleanField(default=1)
+
