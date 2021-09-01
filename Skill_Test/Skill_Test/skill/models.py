@@ -1,10 +1,13 @@
 from django.db import models
+
 class DomainCategory(models.Model):
     category_id = models.CharField(max_length=20)
     category_name = models.CharField(max_length=20)
+
 class DifficultyLevel(models.Model):
     difficulty_id = models.CharField(max_length=20)
     difficulty_name = models.CharField(max_length=20)
+
 class QuestionBank(models.Model):
     question_id = models.CharField(max_length=50,primary_key=True)
     question = models.TextField(max_length=1000)
@@ -47,3 +50,18 @@ class TestLinkTable(models.Model):
     test_link = models.URLField()
     flag = models.BooleanField(default=1)
 
+class CandidatesTable(models.Model):
+    class Meta:
+        db_table = 'Candidatestable'
+    candidate_id = models.IntegerField(primary_key=True)
+    candidate_name = models.CharField(max_length=200)
+    domain = models.CharField(max_length=50)
+    flag = models.BooleanField(default=1)
+
+class EmployeeTable(models.Model):
+    class Meta:
+        db_table = 'Employeetable'
+    emp_id = models.IntegerField(primary_key=True)
+    emp_name = models.CharField(max_length=200)
+    domain = models.CharField(max_length=50)
+    flag = models.BooleanField(default=1)
