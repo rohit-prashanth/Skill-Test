@@ -12,3 +12,5 @@ class QuestionBank(models.Model):
     modified_date = models.DateField(auto_now=True)
     flag = models.BooleanField(default=1)
 
+class sample(models.Model):
+    pass
