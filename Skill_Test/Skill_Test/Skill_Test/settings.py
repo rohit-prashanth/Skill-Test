@@ -77,7 +77,7 @@ WSGI_APPLICATION = 'Skill_Test.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'pocdatabase',
+        'NAME': 'skilltestdatabase',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',

@@ -11,4 +11,3 @@ class QuestionBank(models.Model):
     created_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
     flag = models.BooleanField(default=1)
-
