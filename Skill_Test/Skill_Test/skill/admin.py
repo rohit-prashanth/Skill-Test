@@ -1,7 +1,10 @@
 from django.contrib import admin
-from .models import QuestionBank
+from .models import *
 
 # Register your models here.
-@admin.register(QuestionBank)
-class QuestionBankAdmin(admin.ModelAdmin):
-    list_display = ['question_id','question','difficulty_level','difficulty_id','category_names','category_id','created_date','modified_date','flag']
+admin.site.register(QuestionBank)
+admin.site.register(DomainCategory)
+admin.site.register(DifficultyLevel)
+
+
+
