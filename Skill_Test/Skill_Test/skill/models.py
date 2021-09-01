@@ -11,3 +11,34 @@ class QuestionBank(models.Model):
     created_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
     flag = models.BooleanField(default=1)
+
+class OptionsTable(models.Model):
+    option_id = models.CharField(max_length=50,primary_key=True)
+    question_id = models.ForeignKey(QuestionBank, on_delete=models.CASCADE)
+    op1 = models.CharField(max_length=50)
+    op2 = models.CharField(max_length=50)
+    op3 = models.CharField(max_length=50)
+    op4 = models.CharField(max_length=50)
+    correct_option = models.CharField(max_length=50)
+    created_date = models.DateField(auto_now_add=True)
+    modified_date = models.DateField(auto_now=True)
+
+class ExamResults(models.Model):
+    exam_id = models.CharField(max_length=50)
+    cad_id = models.CharField(max_length=50)
+    given_by = models.CharField(max_length=50)
+    given_date = models.CharField(max_length=50)
+    flag = models.BooleanField(default=1)
+
+class TestLinkTable(models.Model):
+    test_id = models.CharField(max_length=50,primary_key=True)
+    category_id = models.CharField(max_length=10)
+    no_of_questions = models.CharField(max_length=10)
+    no_of_easy_questions = models.CharField(max_length=10)
+    no_of_medium_questions = models.CharField(max_length=10)
+    no_of_hard_questions = models.CharField(max_length=10)
+    date_of_exam = models.DateField()
+    start_time = models.CharField(max_length=50)
+    end_time = models.CharField(max_length=50)
+    test_link = models.URLField()
+    flag = models.BooleanField(default=1)
