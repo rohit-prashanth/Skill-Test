@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <title>{{ name }}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .align{
+        width: 350px;
+        padding: 24px;
+        margin: 72px auto 68px;
+        background: #fff;
+        position: relative;
+        box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+        font-family: helvetica;
+        }
+    </style>
+</head>
+<body style="background-color:#f0f0f1">
+    <div class="align">
+        <h3 align="center" style="font-family: cursive;">Conduct Test</h3>
+<form action="#" method="POST">
+    {% csrf_token %}
+    To : <input type="text" name="email" required> <br><br>
+    URL : <textarea name="content" required>Hi All,
+    Good Morning!
+Please find the below Assessment details and start assessment at 10:30 AM without fail.
+
+
+
+Topics: Django
+
+Exam Type: Objective
+
+No of Questions: 100
+
+Duration: 120 mins.
+
+    http://127.0.0.1:8000/
+
+</textarea><br><br>
+
+<button style="background-color:blue">Submit</button>
+
+
+
+</form>
+
+</body>
+
+</html>
