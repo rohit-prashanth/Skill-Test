@@ -10,7 +10,7 @@ class QuestionBankAdmin(admin.ModelAdmin):
 
 @admin.register(OptionsTable)
 class OptionTableAdmin(admin.ModelAdmin):
-    list_display = ['option_id','question_id','op1','op2','op3','op4','correct_option','created_date','modified_date']
+    list_display = ['option_id','question_id','option1','option2','option3','option4','correct_option','created_date','modified_date']
 
 @admin.register(ExamResults)
 class ExamResultsAdmin(admin.ModelAdmin):

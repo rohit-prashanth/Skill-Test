@@ -3,7 +3,6 @@ from django.db import models
 class DomainCategory(models.Model):
     category_id = models.CharField(max_length=20)
     category_name = models.CharField(max_length=20)
-
     def __str__(self):
         return self.category_name
 class DifficultyLevel(models.Model):
@@ -24,12 +23,13 @@ class QuestionBank(models.Model):
         return self.question_id
 class OptionsTable(models.Model):
     option_id = models.CharField(max_length=50,primary_key=True)
-    question_id = models.ForeignKey(QuestionBank, on_delete=models.CASCADE)
-    op1 = models.CharField(max_length=50)
-    op2 = models.CharField(max_length=50)
-    op3 = models.CharField(max_length=50)
-    op4 = models.CharField(max_length=50)
-    correct_option = models.CharField(max_length=50)
+    question_id = models.OneToOneField(QuestionBank, on_delete=models.CASCADE)
+    option1 = models.CharField(max_length=50)
+    option2 = models.CharField(max_length=50)
+    option3 = models.CharField(max_length=50)
+    option4 = models.CharField(max_length=50)
+    options=[('option1','option1'),('option2','option2'),('option3','option3'),('option4','option4'),]
+    correct_option = models.CharField(choices=options,max_length=50)
     created_date = models.DateField(auto_now_add=True)
     modified_date = models.DateField(auto_now=True)
 
@@ -59,6 +59,7 @@ class CandidatesTable(models.Model):
     candidate_id = models.IntegerField(primary_key=True)
     candidate_name = models.CharField(max_length=200)
     domain = models.CharField(max_length=50)
+    candidate_mail = models.EmailField(max_length=254)
     flag = models.BooleanField(default=1)
 
 class EmployeeTable(models.Model):
