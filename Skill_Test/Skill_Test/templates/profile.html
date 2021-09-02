@@ -1,10 +1,21 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="{% static 'CSS/style.css' %}">
 </head>
-<body>
+<body><br>
+
+    <ul class="nav justify-content-end">
+      <li class="nav-item">
+        <a class="btn btn-primary" href="{% url 'login' %}">Logout</a>
+      </li>
+        &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+    </ul>
+<div class="container-fluid">
 <h1>Profile</h1>
 <h3>Welcome {{name}}</h3>
 {% if messages %}
@@ -12,7 +23,136 @@
         <small {% if message.tags %} class="{{message.tags}}"  {% endif %}>{{message}}</small>
     {% endfor %}
 {% endif %}
+<ul class="nav">
+  <li class="nav-item">
+    <a class="btn btn-primary btn-lg" href="#">Create Test Link</a>
+  </li>&nbsp&nbsp&nbsp
+  <li class="nav-item">
+    <a class="btn btn-secondary btn-lg" href="#">Conduct Test</a>
+  </li>
+</ul>
+<br>
+<h3>Live Test Links</h3>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th scope="col">Test_ID</th>
+      <th scope="col">Category_ID</th>
+      <th scope="col">No_Of_Questions</th>
+      <th scope="col">Easy_Questions</th>
+        <th scope="col">Medium_Questions</th>
+      <th scope="col">Hard_Questions</th>
+      <th scope="col">Date_Of_Exam</th>
+      <th scope="col">Start_Time</th>
+        <th scope="col">End_Time</th>
+      <th scope="col">Test_Link</th>
 
-<a href="{% url 'login' %}">Logout</a>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+
+      <th scope="row">PY2021090101</th>
+      <td>PY</td>
+      <td>10</td>
+      <td>3</td>
+      <td>3</td>
+      <td>4</td>
+      <td>2021-09-01</td>
+      <td>11:00</td>
+      <td>01:00</td>
+        <td>https://www.w3schools.com/html/html_head.asp</td>
+
+    </tr>
+    <tr>
+      <th scope="row">JV2021090101</th>
+      <td>JV</td>
+      <td>10</td>
+      <td>4</td>
+        <td>3</td>
+      <td>3</td>
+      <td>2021-09-01</td>
+        <td>11:00</td>
+      <td>01:00</td>
+      <td>https://www.w3schools.com/html/html_head.asp</td>
+
+    </tr>
+    <tr>
+      <th scope="row">UI2021090101</th>
+      <td>UI</td>
+      <td>10</td>
+        <td>3</td>
+      <td>4</td>
+        <td>3</td>
+      <td>2021-09-01</td>
+        <td>12:00</td>
+      <td>01:00</td>
+        <td>https://www.w3schools.com/html/html_head.asp</td>
+
+
+    </tr>
+  </tbody>
+</table>
+<hr style="height:1px;border-width:1;background-color:gray">
+  <h3>History</h3>
+  <table class="table table-bordered">
+  <thead>
+    <tr>
+       <th scope="col">Test_ID</th>
+      <th scope="col">Category_ID</th>
+      <th scope="col">No_Of_Questions</th>
+      <th scope="col">Easy_Questions</th>
+        <th scope="col">Medium_Questions</th>
+      <th scope="col">Hard_Questions</th>
+      <th scope="col">Date_Of_Exam</th>
+      <th scope="col">Start_Time</th>
+        <th scope="col">End_Time</th>
+      <th scope="col">Test_Link</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">DN2021052901</th>
+      <td>DN</td>
+      <td>10</td>
+      <td>3</td>
+      <td>3</td>
+      <td>4</td>
+      <td>2021-05-29</td>
+      <td>11:00</td>
+      <td>01:00</td>
+      <td>https://www.w3schools.com/html/html_head.asp</td>
+
+    </tr>
+    <tr>
+      <th scope="row">IDM2021081801</th>
+      <td>IDM</td>
+      <td>10</td>
+      <td>3</td>
+      <td>3</td>
+      <td>4</td>
+      <td>2021-08-18</td>
+      <td>10:00</td>
+      <td>12:00</td>
+      <td>https://www.w3schools.com/html/html_head.asp</td>
+
+    </tr>
+    <tr>
+     <th scope="row">PY2021090101</th>
+      <td>PY</td>
+      <td>10</td>
+      <td>4</td>
+      <td>3</td>
+      <td>3</td>
+      <td>2021-08-01</td>
+      <td>01:00</td>
+      <td>03:00</td>
+      <td>https://www.w3schools.com/html/html_head.asp</td>
+
+    </tr>
+  </tbody>
+</table>
+</div>
 </body>
 </html>
