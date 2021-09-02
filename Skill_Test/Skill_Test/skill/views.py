@@ -3,8 +3,25 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
-from .forms import SignUpForm
+from .forms import QuestionBankForm,OptionTableForm
+from django.contrib import messages
+def questions(request):
+    if request.method == 'POST':
+        fm = QuestionBankForm(request.POST)
+        fm1 = OptionTableForm(request.POST)
+        if fm.is_valid():
+            fm.save()
+            if fm1.is_valid():
+                fm1.save()
+            return HttpResponseRedirect('/ques')
+        else:
+            messages.error(request,'Invalid Data')
+            return HttpResponseRedirect('/ques')
 
+    else:
+        fm = QuestionBankForm()
+        fm1 = OptionTableForm()
+        return render(request,'questions.html',{'form':fm,'form1':fm1})
 
 def user_login(request):
 
