@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .align{
+        width: 350px;
+        padding: 24px;
+        margin: 72px auto 68px;
+        background: #fff;
+        position: relative;
+        box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+        font-family: helvetica;
+        }
+        #id_username{
+        width: 300px;
+        height: 30px;
+        border-radius:2px;
+        }
+        #id_password{
+        width: 300px;
+        height: 30px;
+        border-radius:2px;
+        }
+        #lbutton{
+           background-color: blue;
+           width:310px;
+           height:40px;
+           background-color:rgb(34, 113, 177);
+           color:white;
+           font-family: cursive;
+            }
+        #lbutton:hover{
+        background-color: #023e8a;
+        }
+        label{
+        font-family: cursive;
+        }
+
+    </style>
+</head>
+<body style="background-color: #f0f0f1">
+    <div class="align">
+    <h3 align="center" style="font-family: cursive;">Skill Test</h3>
+
+        <form action="" method="POST" novalidate>
+            {% csrf_token %}
+            <table>
+            {% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <p class="er">{{error}}</p>
+                {% endfor %}
+            {% endif %}
+
+            {% for fm in form %}
+                {{fm.label_tag}} <br>{{fm}}<br> {{fm.errors|striptags}} <br>
+            {% endfor %}
+            </table>
+            <input id="lbutton" class="btn btn-primary" type="submit" value="Login">
+        </form>
+    </div>
+</body>
+</html>
