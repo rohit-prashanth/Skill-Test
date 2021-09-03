@@ -31,12 +31,11 @@ class DiffucultyLevelAdmin(admin.ModelAdmin):
 
 @admin.register(CandidatesTable)
 class CandidatesTableAdmin(admin.ModelAdmin):
-    list_display = ['candidate_id','candidate_name','domain','flag']
+    list_display = ['candidate_id','first_name','last_name','domain_name','flag','mobile_no',"created_date",'candidate_mail','flag']
 
 @admin.register(EmployeeTable)
 class EmployeeTableAdmin(admin.ModelAdmin):
     list_display = ['emp_id', 'emp_name','domain','flag']
-
 
 
 
