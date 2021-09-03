@@ -7,6 +7,8 @@ from .forms import QuestionBankForm,OptionTableForm
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+from .models import QuestionBank,OptionsTable
+
 
 def questions(request):
     if request.method == 'POST':
@@ -16,6 +18,23 @@ def questions(request):
             fm.save()
             fm1.save()
             messages.success(request, 'Added Question Successfully')
+
+            difficulty_names=fm.cleaned_data['difficulty_names']
+            category_names=fm.cleaned_data['category_names']
+            question = fm.cleaned_data['question']
+            option1 = fm1.cleaned_data['option1']
+            option2 = fm1.cleaned_data['option2']
+            option3 = fm1.cleaned_data['option3']
+            option4 = fm1.cleaned_data['option4']
+            correct_option = fm1.cleaned_data['correct_option']
+            count = QuestionBank.objects.all()
+            q_id = 'QA'+str(category_names)[0:2]+str(len(count))
+            op_id = 'OP'+str(category_names)[0:2]+str(len(count))
+            Object = QuestionBank(question_id = q_id,question=question,difficulty_names=difficulty_names,category_names=category_names)
+            Object.save()
+            Object1 = OptionsTable(option_id=op_id,question_id = q_id,option1=option1,option2=option2,option3=option3,option4= option4,correct_option=correct_option )
+            Object1.save()
+
             return HttpResponseRedirect('/ques')
         else:
             messages.error(request,'Invalid Data')
@@ -23,8 +42,7 @@ def questions(request):
     else:
         fm = QuestionBankForm()
         fm1 = OptionTableForm()
-        question_id = "QAPY05"
-        return render(request,'questions.html',{'form1':fm1,'form':fm,'q':question_id})
+        return render(request,'questions.html',{'form1':fm1,'form':fm})
 
 def user_login(request):
 
