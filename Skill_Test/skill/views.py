@@ -9,6 +9,39 @@ from django.core.mail import send_mail
 from django.conf import settings
 from .models import QuestionBank,OptionsTable
 
+from django.shortcuts import render, redirect
+from django.core.mail import send_mail
+from django.conf import settings
+
+from django.http import JsonResponse, HttpResponse
+from rest_framework.renderers import JSONRenderer
+
+from .models import CandidatesTable
+from .forms import Candidate_form
+
+
+
+def Send_link_to_Email(request):
+    if request.method == 'POST':
+        mails = request.POST.get('email')
+        var = mails.split(',')
+        print(var)
+        for i in var:
+            # to = request.POST.get('email')
+            # print(to)
+            content = request.POST.get('content')
+            print(i, content)
+            send_mail(
+                "Skill Assessment | OILC - 301 | Django | 30-Aug-21",
+                content,
+                settings.EMAIL_HOST_USER,
+                [i]
+
+            )
+
+        return render(request, 'index.html', {'name': 'SEND eMAIL NOTIFICATION'})
+    else:
+        return render(request, 'index.html', {'name': 'SEND eMAIL NOTIFICATION'})
 
 def questions(request):
     if request.method == 'POST':
@@ -73,23 +106,44 @@ def user_logout(request):
     logout(request)
     return HttpResponseRedirect('/login')
 
-def Send_link_to_Email(request):
-    if request.method == 'POST':
-        mails = request.POST.get('email')
-        var = mails.split(',')
-        print(var)
-        for i in var:
-            # to = request.POST.get('email')
-            # print(to)
-            content = request.POST.get('content')
-            print(i, content)
-            send_mail(
-                "Skill Assessment | OILC - 301 | Django | 30-Aug-21",
-                content,
-                settings.EMAIL_HOST_USER,
-                [i]
-            )
-        return render(request, 'index.html', {'name': 'SEND eMAIL NOTIFICATION'})
+
+
+# Create your views here.
+def testApi(request):
+    Time = 11
+    start = 10
+    end = 15
+    if Time in range(start, end):
+        if request.method == "POST":
+            fm = Candidate_form(request.POST)
+            if fm.is_valid():
+                first_name = fm.cleaned_data['first_name']
+                last_name = fm.cleaned_data['last_name']
+                domain = fm.cleaned_data['domain']
+                candidate_mail = fm.cleaned_data['candidate_mail']
+                mobile_no = fm.cleaned_data['mobile_no']
+                candidate_id = 'CA' + first_name + mobile_no[-4:]
+                Object = CandidatesTable(candidate_id=candidate_id,first_name=first_name, last_name=last_name, domain=domain,
+                                      candidate_mail=candidate_mail,mobile_no=mobile_no)
+
+                Object.save()
+                return redirect('/instructions')
+        else:
+            fm = Candidate_form
+            return render(request, 'candidate.html', {'form': fm})
+
+    elif Time <= start:
+        link = 'Test not yet started..'
+        return render(request, 'before_test.html', {'link': link})
     else:
+
+        link = "Access Denied"
+        var = 'This test has been deactivated.Please contact your administrator at Ojas innovative technologies..'
+    return render(request, 'after_test.html', {'link': link, 'test': var})
+
+def Test_instructins(request):
+    return render(request, "home.html")
+
         return render(request, 'index.html', {'name': 'SEND eMAIL NOTIFICATION'})
+
 

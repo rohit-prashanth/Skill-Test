@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 class DomainCategory(models.Model):
     category_id = models.CharField(max_length=20)
@@ -56,9 +57,12 @@ class CandidatesTable(models.Model):
     class Meta:
         db_table = 'Candidatestable'
     candidate_id = models.IntegerField(primary_key=True)
-    candidate_name = models.CharField(max_length=200)
-    domain = models.ForeignKey(DomainCategory,on_delete=models.CASCADE)
+    first_name = models.CharField(max_length=200)
+    last_name = models.CharField(max_length=200)
+    mobile_no = models.CharField(max_length=12)
+    domain_name = models.ForeignKey(DomainCategory,on_delete=models.CASCADE,default='1')
     candidate_mail = models.EmailField(max_length=254)
+    created_date = models.DateField(auto_now_add=True)
     flag = models.BooleanField(default=1)
 
 class EmployeeTable(models.Model):
@@ -68,3 +72,4 @@ class EmployeeTable(models.Model):
     emp_name = models.CharField(max_length=200)
     domain = models.ForeignKey(DomainCategory,on_delete=models.CASCADE)
     flag = models.BooleanField(default=1)
+

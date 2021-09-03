@@ -3,6 +3,19 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import QuestionBank,OptionsTable
 
+from .models import CandidatesTable
+
+class Candidate_form(forms.ModelForm):
+    class Meta:
+        model = CandidatesTable
+        exclude = ['candidate_id','created_date','flag']
+        widget = {
+            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'mobile_no': forms.TextInput(attrs={'class': 'form-control'}),
+            'domain_name': forms.Select(attrs={'class': 'form-control'}),
+            'candidate_mail': forms.TextInput(attrs={'class': 'form-control'}),
+        }
 
 class SignUpForm(UserCreationForm):
     password2 = forms.CharField(label='Confirm Password (again)', widget=forms.PasswordInput)
@@ -12,6 +25,7 @@ class SignUpForm(UserCreationForm):
         fields = ['username', 'first_name', 'last_name', 'email']
         labels = {'email': 'Email'}
         widget = {
+
         }
 
 

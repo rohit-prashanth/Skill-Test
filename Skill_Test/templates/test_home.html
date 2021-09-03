@@ -1,0 +1,104 @@
+<!doctype html>
+
+{% load static %}
+
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+
+    <title>Skill Test!!!!</title>
+      <style>
+
+        body
+        {
+            background-image: url({% static 'images/test1.jpg' %});
+            background-repeat:no-repeat;
+            background-size: 1600px;
+
+       }
+
+        .footer {
+           position: fixed;
+           left: 0;
+           bottom: 0;
+            height:50px;
+           width: 100%;
+           background-color: white;
+           color: white;
+           text-align: center;
+        }
+</style>
+
+
+
+</style>
+
+
+  </head>
+  <body>
+
+    <nav class="navbar navbar-light bg-light">
+
+       <a class="navbar-brand" href="#">
+         <img src="{% static 'images/ojas.png' %}" alt="Ojas" width="150" height="50" style="padding-left: 20px;">
+      </a>
+</nav>
+
+<div class="footer">
+  <p style="color: black;padding-left: -50px;padding-top: 10px;">Facing Technical difficulties taking this test? &nbsp;
+      <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-telephone" viewBox="0 0 16 16">
+          <path d="M3.654 1.328a.678.678 0 0 0-1.015-.063L1.605 2.3c-.483.484-.661 1.169-.45 1.77a17.568 17.568 0 0 0 4.168 6.608 17.569 17.569 0 0 0 6.608 4.168c.601.211 1.286.033 1.77-.45l1.034-1.034a.678.678 0 0 0-.063-1.015l-2.307-1.794a.678.678 0 0 0-.58-.122l-2.19.547a1.745 1.745 0 0 1-1.657-.459L5.482 8.062a1.745 1.745 0 0 1-.46-1.657l.548-2.19a.678.678 0 0 0-.122-.58L3.654 1.328zM1.884.511a1.745 1.745 0 0 1 2.612.163L6.29 2.98c.329.423.445.974.315 1.494l-.547 2.19a.678.678 0 0 0 .178.643l2.457 2.457a.678.678 0 0 0 .644.178l2.189-.547a1.745 1.745 0 0 1 1.494.315l2.306 1.794c.829.645.905 1.87.163 2.611l-1.034 1.034c-.74.74-1.846 1.065-2.877.702a18.634 18.634 0 0 1-7.01-4.42 18.634 18.634 0 0 1-4.42-7.009c-.362-1.03-.037-2.137.703-2.877L1.885.511z"/>
+      </svg>&nbsp;
+
+       <img src="{% static 'images/india.png' %}" alt="india" width="30" height="30">&nbsp;
+
+        India: +91 7095920568 &nbsp;
+
+         <img src="{% static 'images/america.jpg' %}" alt="india" width="30" height="25">
+
+          +61 7095920568
+  </p>
+</div>
+
+ <div class="container" style="padding-top:310px;text-align: center;padding-left: 200px;">
+      <a href="{{ link }}">
+          <h4 style="background-color: white;width: 1000px;height: 100px;padding-top: 30px;">{{ link }}</h4>
+      </a>
+</div>
+
+
+{#<br><br>#}
+{#    <div class="container" style="text-align: center;padding-top: 50px;background-color: chocolate;color: white;">#}
+{#         <h4 style="padding-bottom: 50px;">{{ test }}</h4>#}
+{#    </div>#}
+
+
+
+
+
+
+
+
+
+
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-eMNCOe7tC1doHpGoWe/6oMVemdAVTMs2xqW4mwXrXsW0L84Iytr2wi5v2QjrP/xp" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js" integrity="sha384-cn7l7gDp0eyniUwwAZgrzD06kc/tftFf19TOAs2zVinnD/C7E91j9yyk5//jjpt/" crossorigin="anonymous"></script>
+    -->
+  </body>
+
+{% block content %}
+{% endblock %}
+</html>
