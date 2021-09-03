@@ -23,7 +23,7 @@ class QuestionBank(models.Model):
         return self.question_id
 class OptionsTable(models.Model):
     option_id = models.CharField(max_length=50,primary_key=True)
-    # question_id = models.OneToOneField(QuestionBank, on_delete=models.CASCADE)
+    question_id = models.CharField(max_length=50)
     option1 = models.CharField(max_length=50)
     option2 = models.CharField(max_length=50)
     option3 = models.CharField(max_length=50)

@@ -18,10 +18,10 @@ class SignUpForm(UserCreationForm):
 class QuestionBankForm(forms.ModelForm):
     class Meta:
         model = QuestionBank
-        fields = ['question_id','question', 'category_names', 'difficulty_names']
+        fields = ['question', 'category_names', 'difficulty_names']
         labels = {'question': 'Question', 'category_names': 'Category_Names', 'difficulty_names': 'Difficulty_Names'}
         widgets = {
-            'question_id': forms.TextInput(attrs={'class': 'form-control'}),
+            # 'question_id': forms.TextInput(attrs={'class': 'form-control'}),
             'category_names': forms.Select(attrs={'class': 'form-control'}),
             'difficulty_names': forms.Select(attrs={'class': 'form-control'}),
             'question': forms.Textarea(attrs={'class':'form-control'}),
@@ -30,7 +30,7 @@ class QuestionBankForm(forms.ModelForm):
 class OptionTableForm(forms.ModelForm):
     class Meta:
         model = OptionsTable
-        fields = ['option_id','option1', 'option2','option3','option4','correct_option']
+        fields = ['option1', 'option2','option3','option4','correct_option']
         widgets = {
             'option_id': forms.TextInput(attrs={'class': 'form-control'}),
 

@@ -7,13 +7,30 @@ from .forms import QuestionBankForm,OptionTableForm
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+
+from .models import QuestionBank,OptionsTable
+
+
 def questions(request):
     if request.method == 'POST':
         fm = QuestionBankForm(request.POST)
         fm1 = OptionTableForm(request.POST)
         if fm.is_valid() and fm1.is_valid():
-            fm.save()
-            fm1.save()
+            difficulty_names=fm.cleaned_data['difficulty_names']
+            category_names=fm.cleaned_data['category_names']
+            question = fm.cleaned_data['question']
+            option1 = fm1.cleaned_data['option1']
+            option2 = fm1.cleaned_data['option2']
+            option3 = fm1.cleaned_data['option3']
+            option4 = fm1.cleaned_data['option4']
+            correct_option = fm1.cleaned_data['correct_option']
+            count = QuestionBank.objects.all()
+            q_id = 'QA'+str(category_names)[0:2]+str(len(count))
+            op_id = 'OP'+str(category_names)[0:2]+str(len(count))
+            Object = QuestionBank(question_id = q_id,question=question,difficulty_names=difficulty_names,category_names=category_names)
+            Object.save()
+            Object1 = OptionsTable(option_id=op_id,question_id = q_id,option1=option1,option2=option2,option3=option3,option4= option4,correct_option=correct_option )
+            Object1.save()
             return HttpResponseRedirect('/ques')
         else:
             messages.error(request,'Invalid Data')
