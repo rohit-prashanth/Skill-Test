@@ -1,13 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.shortcuts import render
 from .forms import QuestionBankForm,OptionTableForm
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
-
 from .models import QuestionBank,OptionsTable
 
 from django.shortcuts import render, redirect
@@ -49,6 +48,10 @@ def questions(request):
         fm = QuestionBankForm(request.POST)
         fm1 = OptionTableForm(request.POST)
         if fm.is_valid() and fm1.is_valid():
+            fm.save()
+            fm1.save()
+            messages.success(request, 'Added Question Successfully')
+
             difficulty_names=fm.cleaned_data['difficulty_names']
             category_names=fm.cleaned_data['category_names']
             question = fm.cleaned_data['question']
@@ -64,6 +67,7 @@ def questions(request):
             Object.save()
             Object1 = OptionsTable(option_id=op_id,question_id = q_id,option1=option1,option2=option2,option3=option3,option4= option4,correct_option=correct_option )
             Object1.save()
+
             return HttpResponseRedirect('/ques')
         else:
             messages.error(request,'Invalid Data')
@@ -132,9 +136,14 @@ def testApi(request):
         link = 'Test not yet started..'
         return render(request, 'before_test.html', {'link': link})
     else:
+
         link = "Access Denied"
         var = 'This test has been deactivated.Please contact your administrator at Ojas innovative technologies..'
     return render(request, 'after_test.html', {'link': link, 'test': var})
 
 def Test_instructins(request):
     return render(request, "home.html")
+
+        return render(request, 'index.html', {'name': 'SEND eMAIL NOTIFICATION'})
+
+

@@ -5,7 +5,7 @@ from .models import *
 # Register your models here.
 @admin.register(QuestionBank)
 class QuestionBankAdmin(admin.ModelAdmin):
-    list_display = ['question_id','question','difficulty_names','created_date','modified_date','flag']
+    list_display = ['question_id','category_names','question','difficulty_names','created_date','modified_date','flag']
 
 
 @admin.register(OptionsTable)
