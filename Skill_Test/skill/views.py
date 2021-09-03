@@ -1,12 +1,13 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse
 from django.shortcuts import render
 from .forms import QuestionBankForm,OptionTableForm
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
+
 def questions(request):
     if request.method == 'POST':
         fm = QuestionBankForm(request.POST)
@@ -14,6 +15,7 @@ def questions(request):
         if fm.is_valid() and fm1.is_valid():
             fm.save()
             fm1.save()
+            messages.success(request, 'Added Question Successfully')
             return HttpResponseRedirect('/ques')
         else:
             messages.error(request,'Invalid Data')
@@ -21,7 +23,8 @@ def questions(request):
     else:
         fm = QuestionBankForm()
         fm1 = OptionTableForm()
-        return render(request,'questions.html',{'form1':fm1,'form':fm})
+        question_id = "QAPY05"
+        return render(request,'questions.html',{'form1':fm1,'form':fm,'q':question_id})
 
 def user_login(request):
 
@@ -71,3 +74,4 @@ def Send_link_to_Email(request):
         return render(request, 'index.html', {'name': 'SEND eMAIL NOTIFICATION'})
     else:
         return render(request, 'index.html', {'name': 'SEND eMAIL NOTIFICATION'})
+

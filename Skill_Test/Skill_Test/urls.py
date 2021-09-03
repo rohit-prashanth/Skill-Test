@@ -23,6 +23,7 @@ urlpatterns = [
     path('profile', views.user_profile, name='profile'),
     path('logout', views.user_logout, name='logout'),
     path('ques',views.questions,name='ques'),
-    path('test',views.Send_link_to_Email,name='test')
+    path('test',views.Send_link_to_Email,name='test'),
+
 
 ]

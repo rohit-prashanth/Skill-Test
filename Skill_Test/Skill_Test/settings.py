@@ -12,8 +12,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
-from django.core.mail import send_mail
-from django.conf import settings
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,7 +28,6 @@ SECRET_KEY = 'django-insecure-1ez0%a$$(rw!+j4ep#fa&)wizuyq6xg88@lq218fxx6%4yv8zn
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 

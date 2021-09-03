@@ -5,9 +5,9 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <style>
         .align{
-        width: 350px;
+        width: 1000px;
         padding: 24px;
-        margin: 72px auto 68px;
+        margin: 12px auto 68px;
         background: #fff;
         position: relative;
         box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
@@ -16,12 +16,18 @@
     </style>
 </head>
 <body style="background-color:#f0f0f1">
+<center style="padding:30px">
+ <a class="btn btn-primary" style="text-align:center" href="{% url 'profile' %}" role="button">Back To Home</a>
+    </center>
     <div class="align">
+
         <h3 align="center" style="font-family: cursive;">Conduct Test</h3>
-<form action="#" method="POST">
+<form method="POST">
     {% csrf_token %}
-    To : <input type="text" name="email" required> <br><br>
-    URL : <textarea name="content" required>Hi All,
+<!--    To : <input type="text" name="email" required> <br><br>-->
+<!--    URL : <textarea name="content" required>-->
+    To : <input type="text" name="email" class="form-control" required><br>
+    URL : <textarea class="form-control" name="content" rows="12" required>Hi All,
     Good Morning!
 Please find the below Assessment details and start assessment at 10:30 AM without fail.
 
@@ -38,13 +44,14 @@ Duration: 120 mins.
     http://127.0.0.1:8000/
 
 </textarea><br><br>
-
-<button style="background-color:blue">Submit</button>
+<center>
+<button class="btn btn-primary">Submit</button>
+</center>
 
 
 
 </form>
-
+    </div>
 </body>
 
 </html>
