@@ -14,7 +14,6 @@ from django.core.mail import send_mail
 from django.conf import settings
 
 from django.http import JsonResponse, HttpResponse
-from rest_framework.renderers import JSONRenderer
 
 from .models import CandidatesTable
 from .forms import Candidate_form
@@ -144,6 +143,5 @@ def testApi(request):
 def Test_instructins(request):
     return render(request, "home.html")
 
-        return render(request, 'index.html', {'name': 'SEND eMAIL NOTIFICATION'})
 
 
