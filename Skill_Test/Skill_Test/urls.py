@@ -20,15 +20,15 @@ from skill import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.user_login, name='login'),
-    path('profile', views.user_profile, name='profile'),
-    path('logout', views.user_logout, name='logout'),
-    path('ques',views.questions,name='ques'),
-
-    path('email_notification',views.Send_link_to_Email,name='email_notification'),
-    path('testapi',views.testApi,name='testapi'),
+    path('profile/', views.user_profile, name='profile'),
+    path('logout/', views.user_logout, name='logout'),
+    path('ques/',views.questions,name='ques'),
+    path('email_notification/',views.Send_link_to_Email,name='email_notification'),
+    path('testapi/',views.testApi,name='testapi'),
     path('instructions/', views.Test_instructins,name= 'instructions'),
+    path('test/',views.Send_link_to_Email,name='test'),
+    path('link/',views.createtestlink,name='link'),
 
-    path('test',views.Send_link_to_Email,name='test'),
 
 
 

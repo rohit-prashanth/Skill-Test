@@ -42,14 +42,14 @@ class ExamResults(models.Model):
 
 class TestLinkTable(models.Model):
     test_id = models.CharField(max_length=50,primary_key=True)
-    category_id = models.CharField(max_length=10)
+    category_name = models.ForeignKey(DomainCategory,on_delete=models.CASCADE,default='1')
     no_of_questions = models.CharField(max_length=10)
     no_of_easy_questions = models.CharField(max_length=10)
     no_of_medium_questions = models.CharField(max_length=10)
     no_of_hard_questions = models.CharField(max_length=10)
     date_of_exam = models.DateField()
-    start_time = models.CharField(max_length=50)
-    end_time = models.CharField(max_length=50)
+    start_time = models.TimeField()
+    end_time = models.TimeField()
     test_link = models.URLField()
     flag = models.BooleanField(default=1)
 

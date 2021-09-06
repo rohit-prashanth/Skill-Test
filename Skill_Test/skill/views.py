@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.http import HttpResponseRedirect,HttpResponse
 from django.shortcuts import render
-from .forms import QuestionBankForm,OptionTableForm
+from .forms import QuestionBankForm,OptionTableForm,TestLinkTableForm
 from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
@@ -15,7 +15,7 @@ from django.conf import settings
 
 from django.http import JsonResponse, HttpResponse
 
-from .models import CandidatesTable
+from .models import CandidatesTable,TestLinkTable
 from .forms import Candidate_form
 
 
@@ -67,10 +67,10 @@ def questions(request):
             Object1.save()
             fm.save()
             fm1.save()
-            return HttpResponseRedirect('/ques')
+            return HttpResponseRedirect('/ques/')
         else:
             messages.error(request,'Invalid Data')
-            return HttpResponseRedirect('/ques')
+            return HttpResponseRedirect('/ques/')
     else:
         fm = QuestionBankForm()
         fm1 = OptionTableForm()
@@ -90,7 +90,7 @@ def user_login(request):
             if user is not None:
                 login(request,user)
                 messages.success(request,'Logged in Succesfully !!!')
-                return HttpResponseRedirect('/profile')
+                return HttpResponseRedirect('/profile/')
    else:
         fm = AuthenticationForm()
    return render(request, 'user_login.html', {'form': fm})
@@ -99,11 +99,11 @@ def user_profile(request):
     if request.user.is_authenticated:
         return render(request,'profile.html',{'name':request.user})
     else:
-        return HttpResponseRedirect('/login')
+        return HttpResponseRedirect('/login/')
 
 def user_logout(request):
     logout(request)
-    return HttpResponseRedirect('/login')
+    return HttpResponseRedirect('/login/')
 
 
 
@@ -126,7 +126,7 @@ def testApi(request):
                                       candidate_mail=candidate_mail,mobile_no=mobile_no)
 
                 Object.save()
-                return redirect('/instructions')
+                return redirect('/instructions/')
         else:
             fm = Candidate_form
             return render(request, 'candidate.html', {'form': fm})
@@ -144,4 +144,48 @@ def Test_instructins(request):
     return render(request, "home.html")
 
 
+def createtestlink(request):
 
+    if request.method == 'POST':
+        fm = TestLinkTableForm(request.POST)
+        if fm.is_valid():
+            category_name = fm.cleaned_data['category_name']
+            no_of_questions = fm.cleaned_data['no_of_questions']
+            no_of_easy_questions = fm.cleaned_data['no_of_easy_questions']
+            no_of_medium_questions = fm.cleaned_data['no_of_medium_questions']
+            no_of_hard_questions = fm.cleaned_data['no_of_hard_questions']
+            date_of_exam = fm.cleaned_data['date_of_exam']
+            start_time = fm.cleaned_data['start_time']
+            end_time = fm.cleaned_data['end_time']
+            print(type(category_name),category_name)
+            print(type(date_of_exam),date_of_exam)
+            timestampStr = date_of_exam.strftime("%d%m%Y")
+            if str(category_name) == 'PYTHON':
+                  test_link = 'http://127.0.0.1:8000/pytest'
+                  test_id = str(category_name) + timestampStr
+            if str(category_name) == 'JAVA':
+                test_link = 'http://127.0.0.1:8000/jvtest'
+                test_id = str(category_name) + timestampStr
+            if str(category_name) == 'DOTNET':
+                test_link = 'http://127.0.0.1:8000/dntest'
+                test_id = str(category_name) + timestampStr
+            if str(category_name) == 'IDM':
+                test_link = 'http://127.0.0.1:8000/idmtest'
+                test_id = str(category_name) + timestampStr
+            if str(category_name) == 'UI':
+                test_link = 'http://127.0.0.1:8000/uitest'
+                test_id = str(category_name) + timestampStr
+            if str(category_name) == 'TESTING':
+                test_link = 'http://127.0.0.1:8000/tstest'
+                test_id = str(category_name) + timestampStr
+            Object = TestLinkTable(category_name=category_name, no_of_questions=no_of_questions, no_of_easy_questions=no_of_easy_questions,
+                                     no_of_medium_questions=no_of_medium_questions,no_of_hard_questions=no_of_hard_questions, date_of_exam=date_of_exam,
+                                   start_time=start_time,end_time=end_time,test_link=test_link,test_id=test_id
+                                   )
+            Object.save()
+            messages.success(request,'Successfully generated test link!')
+            return HttpResponseRedirect('/link/')
+
+    else:
+        fm = TestLinkTableForm()
+        return render(request, 'createtestlink.html', {'form': fm})
