@@ -65,8 +65,6 @@ def questions(request):
             Object.save()
             Object1 = OptionsTable(option_id=op_id,question_id = q_id,option1=option1,option2=option2,option3=option3,option4= option4,correct_option=correct_option )
             Object1.save()
-            fm.save()
-            fm1.save()
             return HttpResponseRedirect('/ques')
         else:
             messages.error(request,'Invalid Data')
@@ -118,11 +116,11 @@ def testApi(request):
             if fm.is_valid():
                 first_name = fm.cleaned_data['first_name']
                 last_name = fm.cleaned_data['last_name']
-                domain = fm.cleaned_data['domain']
+                domain_name = fm.cleaned_data['domain_name']
                 candidate_mail = fm.cleaned_data['candidate_mail']
                 mobile_no = fm.cleaned_data['mobile_no']
                 candidate_id = 'CA' + first_name + mobile_no[-4:]
-                Object = CandidatesTable(candidate_id=candidate_id,first_name=first_name, last_name=last_name, domain=domain,
+                Object = CandidatesTable(candidate_id=candidate_id,first_name=first_name, last_name=last_name, domain_name=domain_name,
                                       candidate_mail=candidate_mail,mobile_no=mobile_no)
 
                 Object.save()
