@@ -58,7 +58,8 @@ def questions(request):
             option3 = fm1.cleaned_data['option3']
             option4 = fm1.cleaned_data['option4']
             correct_option = fm1.cleaned_data['correct_option']
-            count = QuestionBank.objects.all()
+            count = QuestionBank.objects.filter(category_names=category_names)
+            print(count)
             q_id = 'QA'+str(category_names)[0:2]+str(len(count))
             op_id = 'OP'+str(category_names)[0:2]+str(len(count))
             Object = QuestionBank(question_id = q_id,question=question,difficulty_names=difficulty_names,category_names=category_names)
