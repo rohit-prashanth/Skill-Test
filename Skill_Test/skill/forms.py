@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import QuestionBank,OptionsTable
 
-from .models import CandidatesTable
+from .models import CandidatesTable,TestLinkTable
 
 class Candidate_form(forms.ModelForm):
     class Meta:
@@ -46,6 +46,7 @@ class OptionTableForm(forms.ModelForm):
         model = OptionsTable
         fields = ['option1', 'option2','option3','option4','correct_option']
         widgets = {
+
             'option_id': forms.TextInput(attrs={'class': 'form-control'}),
 
             'option1': forms.TextInput(attrs={'class':'form-control'}),
@@ -53,4 +54,22 @@ class OptionTableForm(forms.ModelForm):
             'option3': forms.TextInput(attrs={'class':'form-control'}),
             'option4': forms.TextInput(attrs={'class':'form-control'}),
             'correct_option': forms.TextInput(attrs={'class':'form-control'}),
+        }
+
+
+class TestLinkTableForm(forms.ModelForm):
+    class Meta:
+        model = TestLinkTable
+        fields = ['category_name', 'no_of_questions','no_of_easy_questions','no_of_medium_questions','no_of_hard_questions','date_of_exam','start_time','end_time']
+        widgets = {
+            'category_name': forms.Select(attrs={'class': 'form-control'}),
+
+            'no_of_questions': forms.TextInput(attrs={'class': 'form-control'}),
+
+            'no_of_easy_questions': forms.TextInput(attrs={'class':'form-control'}),
+            'no_of_medium_questions': forms.TextInput(attrs={'class':'form-control'}),
+            'no_of_hard_questions': forms.TextInput(attrs={'class':'form-control'}),
+            'date_of_exam': forms.TextInput(attrs={'class':'form-control','type':'date'}),
+            'start_time': forms.TimeInput(attrs={'class':'form-control','type':'time'}),
+            'end_time': forms.TimeInput(attrs={'class':'form-control','type':'time'}),
         }

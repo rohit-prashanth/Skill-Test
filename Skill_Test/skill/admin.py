@@ -18,7 +18,7 @@ class ExamResultsAdmin(admin.ModelAdmin):
 
 @admin.register(TestLinkTable)
 class TestLinkTableAdmin(admin.ModelAdmin):
-    list_display = ['test_id','category_id','no_of_questions','no_of_easy_questions','no_of_medium_questions','no_of_hard_questions','date_of_exam','start_time','end_time','test_link','flag']
+    list_display = ['test_id','category_name','no_of_questions','no_of_easy_questions','no_of_medium_questions','no_of_hard_questions','date_of_exam','start_time','end_time','test_link','flag']
 
 
 @admin.register(DomainCategory)
