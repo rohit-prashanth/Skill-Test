@@ -15,8 +15,8 @@ from django.conf import settings
 
 from django.http import JsonResponse, HttpResponse
 
-from .models import CandidatesTable
-from .forms import Candidate_form
+from .models import CandidatesTable, TestLinkTable
+from .forms import Candidate_form, TestLinkTableForm
 
 
 
@@ -98,7 +98,8 @@ def user_login(request):
 
 def user_profile(request):
     if request.user.is_authenticated:
-        return render(request,'profile.html',{'name':request.user})
+        obj = TestLinkTable.objects.all()
+        return render(request,'profile.html',{'name':request.user,'objects':obj})
     else:
         return HttpResponseRedirect('/login')
 
@@ -127,7 +128,7 @@ def testApi(request):
                                       candidate_mail=candidate_mail,mobile_no=mobile_no)
 
                 Object.save()
-                return redirect('/instructions')
+                return HttpResponseRedirect('/instructions')
         else:
             fm = Candidate_form
             return render(request, 'candidate.html', {'form': fm})
@@ -143,3 +144,50 @@ def testApi(request):
 
 def Test_instructins(request):
     return render(request, "home.html")
+
+def createtestlink(request):
+    if request.method == 'POST':
+        fm = TestLinkTableForm(request.POST)
+        if fm.is_valid():
+            messages.success(request, 'Testlink created Successfully')
+            category_name=fm.cleaned_data['category_name']
+            no_of_questions = fm.cleaned_data['no_of_questions']
+            no_of_easy_questions = fm.cleaned_data['no_of_easy_questions']
+            no_of_medium_questions = fm.cleaned_data['no_of_medium_questions']
+            no_of_hard_questions = fm.cleaned_data['no_of_hard_questions']
+            date_of_exam = fm.cleaned_data['date_of_exam']
+            start_time = fm.cleaned_data['start_time']
+            end_time = fm.cleaned_data['end_time']
+            strdate = date_of_exam.strftime("%d%m%Y")
+            if str(category_name) == "PYTHON":
+                test_link = 'http://127.0.0.1:8000/pytest'
+                test_id = str(category_name) + strdate
+            if str(category_name) == "JAVA":
+                test_link = 'http://127.0.0.1:8000/jvtest'
+                test_id = str(category_name) + strdate
+            if str(category_name) == "DOTNET":
+                test_link = 'http://127.0.0.1:8000/dntest'
+                test_id = str(category_name) + strdate
+            if str(category_name) == "IDM":
+                test_link = 'http://127.0.0.1:8000/idmtest'
+                test_id = str(category_name) + strdate
+            if str(category_name) == "TESTING":
+                test_link = 'http://127.0.0.1:8000/tstest'
+                test_id = str(category_name) + strdate
+            if str(category_name) == "UI":
+                test_link = 'http://127.0.0.1:8000/uitest'
+                test_id = str(category_name) + strdate
+
+            Object = TestLinkTable(test_id=test_id,category_name = category_name,no_of_questions=no_of_questions,
+                                   no_of_easy_questions=no_of_easy_questions,no_of_medium_questions=no_of_medium_questions,
+                                   no_of_hard_questions=no_of_hard_questions, date_of_exam=date_of_exam, start_time=start_time,
+                                   end_time=end_time,test_link=test_link)
+            Object.save()
+
+            return HttpResponseRedirect('/link/')
+        else:
+            messages.error(request,'Invalid Data')
+            return HttpResponseRedirect('/link/')
+    else:
+        fm = TestLinkTableForm()
+        return render(request,'createtestlink.html',{'form':fm})

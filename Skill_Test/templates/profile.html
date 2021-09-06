@@ -40,7 +40,7 @@
   <thead>
     <tr>
       <th scope="col">Test_ID</th>
-      <th scope="col">Category_ID</th>
+      <th scope="col">Category_Name</th>
       <th scope="col">No_Of_Questions</th>
       <th scope="col">Easy_Questions</th>
         <th scope="col">Medium_Questions</th>
@@ -54,47 +54,22 @@
     </tr>
   </thead>
   <tbody>
+    {% for obj in objects %}
     <tr>
 
-      <th scope="row">PY2021090101</th>
-      <td>PY</td>
-      <td>10</td>
-      <td>3</td>
-      <td>3</td>
-      <td>4</td>
-      <td>2021-09-01</td>
-      <td>11:00</td>
-      <td>01:00</td>
-        <td>https://www.w3schools.com/html/html_head.asp</td>
+      <th scope="row">{{obj.test_id}}</th>
+      <td>{{obj.category_name}}</td>
+      <td>{{obj.no_of_questions}}</td>
+      <td>{{obj.no_of_easy_questions}}</td>
+      <td>{{obj.no_of_medium_questions}}</td>
+      <td>{{obj.no_of_hard_questions}}</td>
+      <td>{{obj.date_of_exam}}</td>
+      <td>{{obj.start_time}}</td>
+      <td>{{obj.end_time}}</td>
+        <td>{{obj.test_link}}</td>
 
     </tr>
-    <tr>
-      <th scope="row">JV2021090101</th>
-      <td>JV</td>
-      <td>10</td>
-      <td>4</td>
-        <td>3</td>
-      <td>3</td>
-      <td>2021-09-01</td>
-        <td>11:00</td>
-      <td>01:00</td>
-      <td>https://www.w3schools.com/html/html_head.asp</td>
-
-    </tr>
-    <tr>
-      <th scope="row">UI2021090101</th>
-      <td>UI</td>
-      <td>10</td>
-        <td>3</td>
-      <td>4</td>
-        <td>3</td>
-      <td>2021-09-01</td>
-        <td>12:00</td>
-      <td>01:00</td>
-        <td>https://www.w3schools.com/html/html_head.asp</td>
-
-
-    </tr>
+  {% endfor %}
   </tbody>
 </table>
 <hr style="height:1px;border-width:1;background-color:gray">
