@@ -47,8 +47,7 @@ def questions(request):
         fm = QuestionBankForm(request.POST)
         fm1 = OptionTableForm(request.POST)
         if fm.is_valid() and fm1.is_valid():
-            fm.save()
-            fm1.save()
+
             messages.success(request, 'Added Question Successfully')
 
             difficulty_names=fm.cleaned_data['difficulty_names']
@@ -66,7 +65,8 @@ def questions(request):
             Object.save()
             Object1 = OptionsTable(option_id=op_id,question_id = q_id,option1=option1,option2=option2,option3=option3,option4= option4,correct_option=correct_option )
             Object1.save()
-
+            fm.save()
+            fm1.save()
             return HttpResponseRedirect('/ques')
         else:
             messages.error(request,'Invalid Data')

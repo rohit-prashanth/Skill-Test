@@ -17,8 +17,8 @@ class QuestionBank(models.Model):
     question = models.TextField(max_length=1000)
     category_names = models.ForeignKey(DomainCategory,on_delete=models.CASCADE,default='1')
     difficulty_names = models.ForeignKey(DifficultyLevel,on_delete=models.CASCADE,default='1')
-    created_date = models.DateField(auto_now_add=True)
-    modified_date = models.DateField(auto_now=True)
+    created_date = models.DateField(auto_now_add=True,null=True)
+    modified_date = models.DateField(auto_now=True,null=True)
     flag = models.BooleanField(default=1)
     def __str__(self):
         return self.question_id
@@ -30,8 +30,8 @@ class OptionsTable(models.Model):
     option3 = models.CharField(max_length=50)
     option4 = models.CharField(max_length=50)
     correct_option = models.CharField(max_length=50)
-    created_date = models.DateField(auto_now_add=True)
-    modified_date = models.DateField(auto_now=True)
+    created_date = models.DateField(auto_now_add=True, null=True)
+    modified_date = models.DateField(auto_now=True, null=True)
 
 class ExamResults(models.Model):
     exam_id = models.CharField(max_length=50)
