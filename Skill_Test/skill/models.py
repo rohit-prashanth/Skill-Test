@@ -56,7 +56,7 @@ class TestLinkTable(models.Model):
 class CandidatesTable(models.Model):
     class Meta:
         db_table = 'Candidatestable'
-    candidate_id = models.IntegerField(primary_key=True)
+    candidate_id = models.CharField(primary_key=True,max_length=200)
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     mobile_no = models.CharField(max_length=12)
@@ -68,7 +68,7 @@ class CandidatesTable(models.Model):
 class EmployeeTable(models.Model):
     class Meta:
         db_table = 'Employeetable'
-    emp_id = models.IntegerField(primary_key=True)
+    emp_id = models.CharField(primary_key=True,max_length=200)
     emp_name = models.CharField(max_length=200)
     domain = models.ForeignKey(DomainCategory,on_delete=models.CASCADE)
     flag = models.BooleanField(default=1)
