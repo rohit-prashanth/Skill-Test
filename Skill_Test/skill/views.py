@@ -15,7 +15,7 @@ from django.conf import settings
 
 from django.http import JsonResponse, HttpResponse
 
-from .models import CandidatesTable, TestLinkTable
+from .models import CandidateTable, TestLinkTable
 from .forms import Candidate_form, TestLinkTableForm
 
 
@@ -121,11 +121,11 @@ def testApi(request):
             if fm.is_valid():
                 first_name = fm.cleaned_data['first_name']
                 last_name = fm.cleaned_data['last_name']
-                domain = fm.cleaned_data['domain']
+                domain_name = fm.cleaned_data['domain_name']
                 candidate_mail = fm.cleaned_data['candidate_mail']
                 mobile_no = fm.cleaned_data['mobile_no']
                 candidate_id = 'CA' + first_name + mobile_no[-4:]
-                Object = CandidatesTable(candidate_id=candidate_id,first_name=first_name, last_name=last_name, domain=domain,
+                Object = CandidateTable(candidate_id=candidate_id,first_name=first_name, last_name=last_name, domain_name=domain_name,
                                       candidate_mail=candidate_mail,mobile_no=mobile_no)
 
                 Object.save()
@@ -144,7 +144,7 @@ def testApi(request):
     return render(request, 'after_test.html', {'link': link, 'test': var})
 
 def Test_instructins(request):
-    return render(request, "home.html")
+    return render(request, "instructions_page.html")
 
 def createtestlink(request):
     if request.method == 'POST':

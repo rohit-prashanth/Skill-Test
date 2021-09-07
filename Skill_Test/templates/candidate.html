@@ -28,12 +28,10 @@ opacity: 0.9;
 </head>
 <body>
 <div class="align">
-<form method="POST" action="#">
+<form method="POST">
     <h2 align="center" style="color: slateblue; ">
         Welcome to Ojas Test Portal!...
     </h2>
-
-    <form method="POST">
     {% csrf_token %}
     <table>
             <div class="form-row">
@@ -60,7 +58,7 @@ opacity: 0.9;
 
               </div>
                 <div class="form-group col-md-6 ">
-                    <label for="domain_id">{{form.domain_name.label_tag}}</label>
+                    <label for="domain_name">{{form.domain_name.label_tag}}</label>
                   {{form.domain_name}}
                 </div>
 
@@ -76,10 +74,10 @@ opacity: 0.9;
 
 		//Query All input fields
 		var form_fields = document.getElementsByTagName('input')
-		form_fields[1].placeholder='Name';
-		form_fields[2].placeholder='Mobile Number';
-		form_fields[3].placeholder='Enter Valid Email id';
-		form_fields[4].placeholder='Domain';
+		form_fields[1].placeholder=' Enter your First Name';
+		form_fields[2].placeholder='Enter your Last Name';
+		form_fields[3].placeholder='Enter your Mobile Number';
+		form_fields[4].placeholder=' Enter your Email-id';
 		for (var field in form_fields){
 			form_fields[field].className += ' form-control'
 		}

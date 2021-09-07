@@ -29,7 +29,7 @@ class DomainCategoryAdmin(admin.ModelAdmin):
 class DiffucultyLevelAdmin(admin.ModelAdmin):
     list_display = ['difficulty_id','difficulty_name']
 
-@admin.register(CandidatesTable)
+@admin.register(CandidateTable)
 class CandidatesTableAdmin(admin.ModelAdmin):
     list_display = ['candidate_id','first_name','last_name','domain_name','flag','mobile_no',"created_date",'candidate_mail','flag']
 
