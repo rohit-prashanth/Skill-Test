@@ -56,7 +56,8 @@ def questions(request):
             option3 = fm1.cleaned_data['option3']
             option4 = fm1.cleaned_data['option4']
             correct_option = fm1.cleaned_data['correct_option']
-            count = QuestionBank.objects.filter(category_names=category_names).last()
+            count = QuestionBank.objects.filter(category_names=category_names)
+            print(count,type(count))
             if count:
                 q_id = 'QA'+str(category_names)[0:2]+str(len(count))
                 op_id = 'OP'+str(category_names)[0:2]+str(len(count))
@@ -160,22 +161,22 @@ def createtestlink(request):
             end_time = fm.cleaned_data['end_time']
             strdate = date_of_exam.strftime("%d%m%Y")
             if str(category_name) == "PYTHON":
-                test_link = 'http://127.0.0.1:8000/pytest'
+                test_link = 'http://192.168.7.233:8000/pytest'
                 test_id = str(category_name) + strdate
             if str(category_name) == "JAVA":
-                test_link = 'http://127.0.0.1:8000/jvtest'
+                test_link = 'http://192.168.7.233:8000/jvtest'
                 test_id = str(category_name) + strdate
             if str(category_name) == "DOTNET":
-                test_link = 'http://127.0.0.1:8000/dntest'
+                test_link = 'http://192.168.7.233:8000/dntest'
                 test_id = str(category_name) + strdate
             if str(category_name) == "IDM":
-                test_link = 'http://127.0.0.1:8000/idmtest'
+                test_link = 'http://192.168.7.233:8000/idmtest'
                 test_id = str(category_name) + strdate
             if str(category_name) == "TESTING":
-                test_link = 'http://127.0.0.1:8000/tstest'
+                test_link = 'http://192.168.7.233:8000/tstest'
                 test_id = str(category_name) + strdate
             if str(category_name) == "UI":
-                test_link = 'http://127.0.0.1:8000/uitest'
+                test_link = 'http://192.168.7.233:8000/uitest'
                 test_id = str(category_name) + strdate
 
             Object = TestLinkTable(test_id=test_id,category_name = category_name,no_of_questions=no_of_questions,
