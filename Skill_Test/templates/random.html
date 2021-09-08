@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+{% load shuffletag %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% for i1,i2 in easy_q%}
+    {{i1.question}}<br>
+    {% for i in i2 %}
+        <input type="radio" name="option">{{i}}<br>
+    {% endfor %}
+{% endfor %}
+{% for j1,j2 in medium_q%}
+    {{j1.question}}<br>
+    {% for j in j2 %}
+        <input type="radio" name="option">{{j}}<br>
+    {% endfor %}
+{% endfor %}
+{% for k1,k2 in hard_q%}
+    {{k1.question}}<br>
+    {% for k in k2 %}
+        <input type="radio" name="option">{{k}}<br>
+    {% endfor %}
+{% endfor %}
+</body>
+</html>
