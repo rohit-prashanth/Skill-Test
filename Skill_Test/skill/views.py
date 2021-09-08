@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
+from django.db import models
 from django.http import HttpResponseRedirect,HttpResponse
 from django.shortcuts import render
 from .forms import QuestionBankForm,OptionTableForm
@@ -19,7 +20,6 @@ from django.http import JsonResponse, HttpResponse
 
 from .models import CandidateTable, TestLinkTable
 from .forms import Candidate_form, TestLinkTableForm
-
 
 
 def Send_link_to_Email(request):
@@ -210,6 +210,41 @@ def createtestlink(request):
         return render(request,'createtestlink.html',{'form':fm})
 
 
+def randomques(request):
+    import random
+    questions_easy = QuestionBank.objects.filter(category_names__category_name="PYTHON",difficulty_names__difficulty_name='EASY')
+    randques_easy = random.sample(list(questions_easy),3)
+    questions_medium = QuestionBank.objects.filter(category_names__category_name="PYTHON",difficulty_names__difficulty_name='MEDIUM')
+    randques_medium = random.sample(list(questions_medium), 3)
+    questions_hard = QuestionBank.objects.filter(category_names__category_name="PYTHON",difficulty_names__difficulty_name='HARD')
+    randques_hard = random.sample(list(questions_hard), 3)
+    easy_list=[]
+    for i in randques_easy:
+        option = OptionsTable.objects.filter(question_id=i)
+        for i in option:
+            easy_list.append([i.option1,i.option2,i.option3,i.option4])
+    for sublist in easy_list:
+        random.shuffle(sublist)
+    print(easy_list)
+    medium_list = []
+    for i in randques_medium:
+        option = OptionsTable.objects.filter(question_id=i)
+        for i in option:
+            medium_list.append([i.option1, i.option2, i.option3, i.option4])
+    for sublist in medium_list:
+        random.shuffle(sublist)
+
+    hard_list = []
+    for i in randques_hard:
+        option = OptionsTable.objects.filter(question_id=i)
+        for i in option:
+            hard_list.append([i.option1, i.option2, i.option3, i.option4])
+    for sublist in hard_list:
+        random.shuffle(sublist)
+    my_ques_easy = zip(randques_easy, easy_list)
+    my_ques_medium = zip(randques_medium, medium_list)
+    my_ques_hard = zip(randques_hard, hard_list)
+    return render(request, "random.html", {'easy_q':my_ques_easy,'medium_q':my_ques_medium,'hard_q':my_ques_hard})
 
 def index(request):
     user_list = User.objects.all()
@@ -227,4 +262,5 @@ def index(request):
 
 def successmessage(request):
     return render(request,"successmessage.html")
+
 

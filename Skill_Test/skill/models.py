@@ -22,6 +22,8 @@ class QuestionBank(models.Model):
     flag = models.BooleanField(default=1)
     def __str__(self):
         return self.question_id
+    class Meta:
+        ordering = ('question_id',)
 class OptionsTable(models.Model):
     option_id = models.CharField(max_length=50,primary_key=True)
     question_id = models.CharField(max_length=50)
