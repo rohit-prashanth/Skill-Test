@@ -21,6 +21,8 @@ from django.http import JsonResponse, HttpResponse
 from .models import CandidateTable, TestLinkTable
 from .forms import Candidate_form, TestLinkTableForm
 
+from itertools import chain
+
 
 def Send_link_to_Email(request):
     if request.method == 'POST':
@@ -244,21 +246,20 @@ def randomques(request):
     my_ques_easy = zip(randques_easy, easy_list)
     my_ques_medium = zip(randques_medium, medium_list)
     my_ques_hard = zip(randques_hard, hard_list)
-    return render(request, "random.html", {'easy_q':my_ques_easy,'medium_q':my_ques_medium,'hard_q':my_ques_hard})
-
-def index(request):
-    user_list = User.objects.all()
+    model_objects = list(
+            chain(my_ques_easy, my_ques_medium, my_ques_hard)
+        )
     page = request.GET.get('page', 1)
-
-    paginator = Paginator(user_list, 5)
+    paginator = Paginator(model_objects, 1)
     try:
-        users = paginator.page(page)
+        objects = paginator.page(page)
+        print(objects)
     except PageNotAnInteger:
-        users = paginator.page(1)
+        objects = paginator.page(1)
     except EmptyPage:
-        users = paginator.page(paginator.num_pages)
+        objects = paginator.page(paginator.num_pages)
+    return render(request, "pagination.html", {'easy_q':my_ques_easy,'medium_q':my_ques_medium,'hard_q':my_ques_hard,'obj':objects})
 
-    return render(request, 'pagination.html', {'users': users})
 
 def successmessage(request):
     return render(request,"successmessage.html")
