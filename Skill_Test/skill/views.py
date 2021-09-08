@@ -8,10 +8,12 @@ from django.contrib import messages
 from django.core.mail import send_mail
 from django.conf import settings
 from .models import QuestionBank,OptionsTable
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from django.conf import settings
+from django.contrib.auth.models import User
 
 from django.http import JsonResponse, HttpResponse
 
@@ -192,3 +194,18 @@ def createtestlink(request):
     else:
         fm = TestLinkTableForm()
         return render(request,'createtestlink.html',{'form':fm})
+
+
+def index(request):
+    user_list = User.objects.all()
+    page = request.GET.get('page', 1)
+
+    paginator = Paginator(user_list, 5)
+    try:
+        users = paginator.page(page)
+    except PageNotAnInteger:
+        users = paginator.page(1)
+    except EmptyPage:
+        users = paginator.page(paginator.num_pages)
+
+    return render(request, 'pagination.html', {'users': users})

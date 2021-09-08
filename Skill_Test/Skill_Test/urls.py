@@ -28,6 +28,7 @@ urlpatterns = [
     path('instructions/', views.Test_instructins,name= 'instructions'),
     path('test/',views.Send_link_to_Email,name='test'),
     path('link/',views.createtestlink,name='link'),
+    path('index', views.index)
 
 
 
