@@ -55,21 +55,17 @@ class TestLinkTable(models.Model):
     test_link = models.URLField()
     flag = models.BooleanField(default=1)
 
-class CandidatesTable(models.Model):
-    class Meta:
-        db_table = 'Candidatestable'
+class CandidateTable(models.Model):
     candidate_id = models.CharField(primary_key=True,max_length=200)
     first_name = models.CharField(max_length=200)
     last_name = models.CharField(max_length=200)
     mobile_no = models.CharField(max_length=12)
     domain_name = models.ForeignKey(DomainCategory,on_delete=models.CASCADE,default='1')
     candidate_mail = models.EmailField(max_length=254)
-    created_date = models.DateField(auto_now_add=True)
+    created_date = models.DateField(auto_now_add=True,null=True)
     flag = models.BooleanField(default=1)
 
 class EmployeeTable(models.Model):
-    class Meta:
-        db_table = 'Employeetable'
     emp_id = models.CharField(primary_key=True,max_length=200)
     emp_name = models.CharField(max_length=200)
     domain = models.ForeignKey(DomainCategory,on_delete=models.CASCADE)

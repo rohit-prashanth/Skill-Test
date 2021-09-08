@@ -30,7 +30,8 @@ urlpatterns = [
     path('link/',views.createtestlink,name='link'),
     path('random/',views.randomques,name="randomques"),
 
-
+    path('index', views.index),
+    path('successmessage/', views.successmessage, name='successmessage'),
 
 
 ]

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <style>
+        .align{
+        width: 1000px;
+        padding: 24px;
+        margin: 72px auto 68px;
+        background: #fff;
+        position: relative;
+        box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+        font-family: helvetica;
+        }
+    </style>
+</head>
+
+<body style="background-color:#f0f0f1">
+
+    <div class="align">
+        <a class="btn btn-primary" href="{% url 'profile' %}" role="button">Back To Home</a>
+        <a class="btn btn-primary" href="{% url 'link' %}" role="button">Back To create Test link</a>
+        <br>
+        <br>
+        <h3 align="center" style="font-family: cursive;">Test Link Created Successfully!! </h3><br>
+            {% if messages %}
+
+                    {% for message in messages %}
+                    {% if message.tags == 'success' %}
+                <!--    <div class="alert alert-success" role="alert" style="width:50;">-->
+                <!--    Added Question Successfully!-->
+                <!--    </div>-->
+                        {{message}}
+                    {% elif message.tags == 'error'%}
+                <!--    <div class="alert alert-danger" role="alert">-->
+                <!--      Invalid Data!-->
+                <!--    </div>-->
+                        {{message}}
+                    {% endif %}
+                    {% endfor %}
+
+            {% endif %}
+    </div>
+</body>
+</html>

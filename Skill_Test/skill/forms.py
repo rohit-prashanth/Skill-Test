@@ -3,11 +3,11 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from .models import QuestionBank,OptionsTable
 
-from .models import CandidatesTable,TestLinkTable
+from .models import CandidateTable,TestLinkTable
 
 class Candidate_form(forms.ModelForm):
     class Meta:
-        model = CandidatesTable
+        model = CandidateTable
         exclude = ['candidate_id','created_date','flag']
         widget = {
             'first_name': forms.TextInput(attrs={'class': 'form-control'}),

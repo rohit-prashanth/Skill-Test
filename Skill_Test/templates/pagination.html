@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en" xmlns="http://www.w3.org/1999/html" xmlns="http://www.w3.org/1999/html">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <title>Hello, world!</title>
+    <style>
+     .align{
+        width: 1000px;
+        height : 1000px;
+        padding: 55px;
+        margin-top: 50px;
+        margin: 12px auto 68px;
+        background: #fff;
+        position: relative;
+        box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+        font-family: helvetica;
+        }
+
+      .pagination a {
+  border-radius: 5px;
+}
+
+.pagination a.active {
+  border-radius: 5px;
+}
+nav{
+  position: fixed; bottom: 0;
+}
+
+
+
+    </style>
+  </head>
+  <body style="background-color:#f0f0f1">
+   <div class="align" style="margin-top: 100px">
+     <form  method="POST" >
+    {% csrf_token %}
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Username</th>
+      <th>First name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for user in users %}
+      <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.first_name }}</td>
+        <td>{{ user.email }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+     </form>
+   </div>
+
+
+
+{% if users.has_other_pages %}
+<nav aria-label="Page navigation example" >
+  <ul class="pagination"  style="padding-left: 750px">
+    {% if users.has_previous %}
+      <li class="page-item">
+        <a class="page-link" href="?page={{ users.previous_page_number }}" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+    {% else %}
+      <li class="page-item disabled" aria-disabled="true">
+        <a class="page-link" href="#" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+    {% endif %}
+    {% for i in users.paginator.page_range %}
+      {% if users.number == i %}
+        <li class="page-item active" id="active">
+          <a class="page-link"><span>{{ i }} <span class="sr-only" >(current)</span></span></a>
+          </li>
+      {% else %}
+        <li><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+      {% endif %}
+    {% endfor %}
+    {% if users.has_next %}
+      <li><a class="page-link" href="?page={{ users.next_page_number }}" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+      </li>
+    {% else %}
+      <li class="page-item disabled" ><a class="page-link" href="#" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+      </li>
+    {% endif %}
+  </ul>
+</nav>
+{% endif %}
+
+
+
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+
+  </body>
+
+</html>
