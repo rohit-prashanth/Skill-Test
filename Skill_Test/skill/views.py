@@ -147,6 +147,7 @@ def Test_instructins(request):
     return render(request, "instructions_page.html")
 
 def createtestlink(request):
+    global test_link
     if request.method == 'POST':
         fm = TestLinkTableForm(request.POST)
         if fm.is_valid():
@@ -160,35 +161,51 @@ def createtestlink(request):
             start_time = fm.cleaned_data['start_time']
             end_time = fm.cleaned_data['end_time']
             strdate = date_of_exam.strftime("%d%m%Y")
-            if str(category_name) == "PYTHON":
-                test_link = 'http://192.168.7.233:8000/pytest'
-                test_id = str(category_name) + strdate
-            if str(category_name) == "JAVA":
-                test_link = 'http://192.168.7.233:8000/jvtest'
-                test_id = str(category_name) + strdate
-            if str(category_name) == "DOTNET":
-                test_link = 'http://192.168.7.233:8000/dntest'
-                test_id = str(category_name) + strdate
-            if str(category_name) == "IDM":
-                test_link = 'http://192.168.7.233:8000/idmtest'
-                test_id = str(category_name) + strdate
-            if str(category_name) == "TESTING":
-                test_link = 'http://192.168.7.233:8000/tstest'
-                test_id = str(category_name) + strdate
-            if str(category_name) == "UI":
-                test_link = 'http://192.168.7.233:8000/uitest'
-                test_id = str(category_name) + strdate
 
-            Object = TestLinkTable(test_id=test_id,category_name = category_name,no_of_questions=no_of_questions,
-                                   no_of_easy_questions=no_of_easy_questions,no_of_medium_questions=no_of_medium_questions,
-                                   no_of_hard_questions=no_of_hard_questions, date_of_exam=date_of_exam, start_time=start_time,
-                                   end_time=end_time,test_link=test_link)
-            Object.save()
+            total = int(no_of_easy_questions) + int(no_of_hard_questions) + int(no_of_medium_questions)
 
-            return HttpResponseRedirect('/link/')
+            print(total)
+
+            print(no_of_questions)
+
+            if total == int(no_of_questions):
+                if str(category_name) == "PYTHON":
+                    test_link = 'http://192.168.7.233:8000/pytest'
+                    test_id = str(category_name) + strdate
+                if str(category_name) == "JAVA":
+                    test_link = 'http://192.168.7.233:8000/jvtest'
+                    test_id = str(category_name) + strdate
+                if str(category_name) == "DOTNET":
+                    test_link = 'http://192.168.7.233:8000/dntest'
+                    test_id = str(category_name) + strdate
+                if str(category_name) == "IDM":
+                    test_link = 'http://192.168.7.233:8000/idmtest'
+                    test_id = str(category_name) + strdate
+                if str(category_name) == "TESTING":
+                    test_link = 'http://192.168.7.233:8000/tstest'
+                    test_id = str(category_name) + strdate
+                if str(category_name) == "UI":
+                    test_link = 'http://192.168.7.233:8000/uitest'
+                    test_id = str(category_name) + strdate
+
+                Object = TestLinkTable(test_id=test_id,category_name = category_name,no_of_questions=no_of_questions,
+                                       no_of_easy_questions=no_of_easy_questions,no_of_medium_questions=no_of_medium_questions,
+                                       no_of_hard_questions=no_of_hard_questions, date_of_exam=date_of_exam, start_time=start_time,
+                                       end_time=end_time,test_link=test_link)
+                Object.save()
+                messages.add_message(request, messages.SUCCESS, 'Improve your profile today!')
+                return HttpResponseRedirect('/successmessage/')
+            else:
+                messages.error(request, 'Data Not Matched')
+                data = 'Data not Matched'
+                fm = TestLinkTableForm()
+                return render(request,'createtestlink.html',{'form':fm,'data':data})
         else:
             messages.error(request,'Invalid Data')
             return HttpResponseRedirect('/link/')
     else:
         fm = TestLinkTableForm()
         return render(request,'createtestlink.html',{'form':fm})
+
+def successmessage(request):
+    return render(request,"successmessage.html")
