@@ -1,5 +1,5 @@
 <html>
-
+{% load static %}
 <head>
     <title>{{ name }}</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -7,19 +7,24 @@
         .align{
         width: 1000px;
         padding: 24px;
-        margin: 12px auto 68px;
-        background: #fff;
+        margin: 32px auto 68px;
+        background: #1A2226;
         position: relative;
         box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
         font-family: helvetica;
+        color:white;
         }
     </style>
+    <br>
+    <center>
+    <img src="{% static 'images/ojas.png' %}" alt="Ojas" width="200" height="100">
+        </center>
 </head>
-<body style="background-color:#f0f0f1">
-<center style="padding:30px">
+<body style="background-color:#222D32">
+<div class="align">
+
  <a class="btn btn-primary" style="text-align:center" href="{% url 'profile' %}" role="button">Back To Home</a>
-    </center>
-    <div class="align">
+
 
         <h3 align="center" style="font-family: cursive;">Conduct Test</h3>
 <form method="POST">

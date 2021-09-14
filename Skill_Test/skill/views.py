@@ -23,6 +23,9 @@ from .forms import Candidate_form, TestLinkTableForm
 
 from itertools import chain
 
+# import the time module
+import time
+
 
 def Send_link_to_Email(request):
     if request.method == 'POST':
@@ -258,6 +261,11 @@ def randomques(request):
         objects = paginator.page(1)
     except EmptyPage:
         objects = paginator.page(paginator.num_pages)
+
+
+
+
+
     return render(request, "pagination.html", {'easy_q':my_ques_easy,'medium_q':my_ques_medium,'hard_q':my_ques_hard,'obj':objects})
 
 

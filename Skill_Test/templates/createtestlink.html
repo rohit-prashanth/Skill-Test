@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,16 +9,20 @@
         .align{
         width: 1000px;
         padding: 24px;
-        margin: 72px auto 68px;
-        background: #fff;
+        margin: 32px auto 68px;
+        background: #1A2226;
         position: relative;
         box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
         font-family: helvetica;
+        color:white;
         }
-    </style>
+    </style><br>
+    <center>
+    <img src="{% static 'images/ojas.png' %}" alt="Ojas" width="200" height="100">
+        </center>
 </head>
-<body>
-<body style="background-color:#f0f0f1">
+
+<body style="background-color:#222D32">
 
     <div class="align">
         <a class="btn btn-primary" href="{% url 'profile' %}" role="button">Back To Home</a>
