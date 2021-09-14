@@ -151,7 +151,6 @@ def Test_instructins(request):
     return render(request, "instructions_page.html")
 
 def createtestlink(request):
-    global test_link
     if request.method == 'POST':
         fm = TestLinkTableForm(request.POST)
         if fm.is_valid():
